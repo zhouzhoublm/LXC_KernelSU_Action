@@ -1,9 +1,9 @@
-name: z编译 ksu docker lxc 内核
+name: build
 on:
   watch:
     types: [started]
 
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
   build:
