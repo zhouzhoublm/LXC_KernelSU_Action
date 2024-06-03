@@ -15,7 +15,21 @@ jobs:
       CCACHE_NOHASHDIR: "true"
       CCACHE_HARDLINK: "true"
     steps:
+    - name: 大容量空间支持
+      uses: easimon/maximize-build-space@master
+      with:
+          root-reserve-mb: 8192
+          temp-reserve-mb: 2048
+          remove-dotnet: 'true'
+          remove-android: 'true'
+          remove-haskell: 'true'
+          remove-codeql: 'true'
+
+          
     - uses: actions/checkout@v3
+      with:
+          path: KernelSU
+          fetch-depth: 0
     - name: 工作配置
       run: |
         echo "LXC_DOCKER=$(cat config.env | grep -w "LXC_DOCKER" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
